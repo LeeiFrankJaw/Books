@@ -1,0 +1,99 @@
+\newif\ifbsixpaper
+\bsixpapertrue
+\ifbsixpaper
+\documentclass{book}
+\usepackage[b6paper,hmargin=.4in,vmargin=.6in]{geometry}
+\else
+\documentclass[a4paper]{book}
+\usepackage[hmargin=1.5in,vmargin=1in]{geometry}
+\fi
+
+\newcommand*{\titleContent}{Symbolic Logic}
+\newcommand*{\subtitleContent}{An Introduction}
+\newcommand*{\authorContent}{Frederic Breton Fitch}
+\newcommand*{\publisherContent}{The Ronald Press Company}
+
+\title{\titleContent: \subtitleContent}
+\author{\authorContent}
+\date{}
+
+% \usepackage{setspace}
+
+\usepackage{titlesec}
+\titleclass{\chapter}{top}
+\titleformat{\chapter}[block]{\centering\normalfont\bfseries}{}{0pt}{\MakeUppercase}[\markboth{}{}]
+\titlespacing{\chapter}{0pt}{20pt}{10pt}
+
+\begin{document}
+\frontmatter
+
+\begin{titlepage}
+  \vspace*{\stretch{1}}
+  \begin{center}
+    \MakeUppercase{
+      \Huge\bfseries\titleContent} \\[2em]
+      \huge\itshape\subtitleContent
+  \end{center}
+  \vspace*{\stretch{1}}
+  \begin{center}
+    By \\[1em]
+    \MakeUppercase{
+      \authorContent \\[1em]
+      \tiny Professor of Philosophy \\
+      Yale University}
+  \end{center}
+  \vspace*{\stretch{5}}
+  \begin{center}
+    \MakeUppercase{\publisherContent\ · New York}
+  \end{center}
+  \vspace*{\stretch{.5}}
+\end{titlepage}
+
+\thispagestyle{empty}
+\vspace*{\stretch{3}}
+\begin{center}
+  Copyright, 1952, by \\[1ex]
+  \textsc{\publisherContent} \\[1ex]
+  ———\\[1ex]
+  \textit{All Rights Reserved} \\[1em]
+  \begin{minipage}{2in}
+    \footnotesize The text of this publication or any part thereof may not be reproduced in any manner whatsoever without permission in writing from the publisher.
+  \end{minipage}
+
+  \vspace*{\stretch{1}}
+
+  3 \\
+  \textsc{vr-vr}
+\end{center}
+\vspace*{\stretch{5}}
+\begin{center}
+  \small Library of Congress Catalog Card Number: 52-6196 \\
+  \MakeUppercase{\tiny Printed in the United States of America}
+\end{center}
+% \vspace*{\stretch{.2}}
+
+\chapter*{Preface}
+
+This book is intended both as a textbook in symbolic logic for undergraduate and graduate students and as a treatise on the foundations of logic.  Much of the material was developed in an undergraduate course given for some years in Yale University.  The course was essentially a first course in logic for students interested in science.  Many alternative devices and methods of presentation were tried.  Those included here are the ones that seemed most successful.
+
+The early sections of the book present rules for working with implication, conjunction, disjunction, and negation.  In connection with negation, there is a discussion of Heyting's system of logic and the law of excluded middle.  Following this, various modal concepts such as necessity, possibility, and strict implication are introduced.  The theory of identity and the general theory of classes and relations are presented.  The theory of quantifiers is then developed.  Finally, operations on classes and relations are defined and discussed.  The book provides a novel way for avoiding Russell's paradox and other similar paradoxes.  No theory of types is required.  The system of logic employed is shown to be free from contradiction.  There are three appendices: Appendix A shows how classes can be defined by means of four operators using techniques similar to those of Curry's combinatory logic.  Appendix B shows in outline hmv the system can be further extended so as to form a consistent foundation for a large part of mathematics.  Appendix C discusses an important kind of philosophical reasoning and indicates why the system of logic of the book is especially ,Yell suited for handling it.
+
+The student not acquainted with symbolic logic can omit Sections 20 and 27 which are of a more difficult nature than the other sections.  The three appendices are also of a somewhat advanced nature.  These appendices and the Foreword are addressed mainly to readers who already have some knowledge of symbolic logic.
+
+The sections concerned with modal logic, namely, 11, 12, 13, and 23, can be omitted if desired, since the other sections do not depend essentially on them.
+
+I am greatly indebted to my past teachers and to my present colleagues and students for their inspiring interest in logic and philosophy and for their helpful insights and suggestions.  I am also, of course, greatly indebted to many contemporary writers in logic and allied fields.  In some ways my debt is greatest to Professor Filmer S. C. Northrop, since he made clear to me the importance of modern logic and guided my first work in it.  Some of the fundamental ideas of this system of logic were conceived during the tenure of a John Simon Guggenheim Memorial Fellowship in 1945-1946.
+
+Thanks are due to Miss Erna F. Schneider for her careful reading of a large part of the manuscript.  She made numerous useful suggestions.  I am also very grateful to Dr.\ John R. Myhill for studying some of the more difficult portions of the manuscript, for pointing out some logical and typographical errors, and for making various constructive criticisms.  I wish to thank Mr.\ I. Sussmann for calling my attention to typographical errors, and Miss Mabel R. Weld for her help in typing the manuscript.  Various members of the Yale philosophy department also made helpful suggestions regarding the general scheme of the book.  I am indebted to Mr.\ Herbert P. Galliher and Mr.\ Abner E. Shimony for valuable comments on the manuscript.
+
+\vspace{1em}
+\hfill\textsc{Frederic B. Fitch}
+
+\noindent New Haven, Conn.
+
+February, 1952
+\end{document}
+
+% Local Variables:
+% TeX-engine: luatex
+% End:
