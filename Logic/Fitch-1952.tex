@@ -1,8 +1,8 @@
 \newif\ifbsixpaper
 \bsixpapertrue
 \ifbsixpaper
-\documentclass{book}
-\usepackage[b6paper,hmargin=.4in,vmargin=.6in]{geometry}
+\documentclass[]{book}
+\usepackage[b6paper,paperheight=7.5in,hmargin=.4in,vmargin=.6in]{geometry}
 \else
 \documentclass[a4paper]{book}
 \usepackage[hmargin=1.5in,vmargin=1in]{geometry}
@@ -19,13 +19,40 @@
 
 % \usepackage{setspace}
 
-\usepackage{titlesec}
+\usepackage[pagestyles]{titlesec}
 \titleclass{\chapter}{top}
-\titleformat{\chapter}[block]{\centering\normalfont\bfseries}{}{0pt}{\MakeUppercase}[\markboth{}{}]
-\titlespacing{\chapter}{0pt}{20pt}{10pt}
+\titleformat{\chapter}[block]{\centering\normalfont\large}{{Chapter \thechapter\\[1em]}}{0pt}{\MakeUppercase}
+\titlespacing{\chapter}{0pt}{48pt}{10pt}
+\newpagestyle{fmatter}[\footnotesize]{
+  \sethead[\thepage][\MakeUppercase{\chaptertitle}][]
+  {}{\chaptertitle}{\thepage}}
+\renewpagestyle{headings}[\footnotesize]{
+  \sethead[\thepage][\MakeUppercase{\titleContent}][\lbrack Ch.\ \thechapter]
+  {Ch.\ \thechapter\rbrack}{\chaptertitle}{\thepage}}
+
+\usepackage{lipsum}
+
+\usepackage{xcolor}
+\usepackage[
+  pdfusetitle,
+  hyperfootnotes=false,
+  colorlinks=true,
+  urlcolor={.},
+  linkcolor={.}
+]{hyperref}
+
+\renewcommand*{\neg}{\mathord{\sim}}
+
+\interfootnotelinepenalty=10000
+
+\AtBeginDocument{
+  \setlength{\parindent}{10pt}
+  \setlength{\parskip}{0pt plus 3pt}
+}
 
 \begin{document}
 \frontmatter
+\pagestyle{fmatter}
 
 \begin{titlepage}
   \vspace*{\stretch{1}}
@@ -33,7 +60,7 @@
     \MakeUppercase{
       \Huge\bfseries\titleContent} \\[2em]
       \huge\itshape\subtitleContent
-  \end{center}
+    \end{center}
   \vspace*{\stretch{1}}
   \begin{center}
     By \\[1em]
@@ -73,16 +100,17 @@
 % \vspace*{\stretch{.2}}
 
 \chapter*{Preface}
+\chaptermark{Preface}
 
 This book is intended both as a textbook in symbolic logic for undergraduate and graduate students and as a treatise on the foundations of logic.  Much of the material was developed in an undergraduate course given for some years in Yale University.  The course was essentially a first course in logic for students interested in science.  Many alternative devices and methods of presentation were tried.  Those included here are the ones that seemed most successful.
 
-The early sections of the book present rules for working with implication, conjunction, disjunction, and negation.  In connection with negation, there is a discussion of Heyting's system of logic and the law of excluded middle.  Following this, various modal concepts such as necessity, possibility, and strict implication are introduced.  The theory of identity and the general theory of classes and relations are presented.  The theory of quantifiers is then developed.  Finally, operations on classes and relations are defined and discussed.  The book provides a novel way for avoiding Russell's paradox and other similar paradoxes.  No theory of types is required.  The system of logic employed is shown to be free from contradiction.  There are three appendices: Appendix A shows how classes can be defined by means of four operators using techniques similar to those of Curry's combinatory logic.  Appendix B shows in outline hmv the system can be further extended so as to form a consistent foundation for a large part of mathematics.  Appendix C discusses an important kind of philosophical reasoning and indicates why the system of logic of the book is especially ,Yell suited for handling it.
+The early sections of the book present rules for working with implication, conjunction, disjunction, and negation.  In connection with negation, there is a discussion of Heyting's system of logic and the law of excluded middle.  Following this, various modal concepts such as necessity, possibility, and strict implication are introduced.  The theory of identity and the general theory of classes and relations are presented.  The theory of quantifiers is then developed.  Finally, operations on classes and relations are defined and discussed.  The book provides a novel way for avoiding Russell's paradox and other similar paradoxes.  No theory of types is required.  The system of logic employed is shown to be free from contradiction.  There are three appendices: Appendix A shows how classes can be defined by means of four operators using techniques similar to those of Curry's combinatory logic.  Appendix B shows in outline how the system can be further extended so as to form a consistent foundation for a large part of mathematics.  Appendix C discusses an important kind of philosophical reasoning and indicates why the system of logic of the book is especially well suited for handling it.
 
 The student not acquainted with symbolic logic can omit Sections 20 and 27 which are of a more difficult nature than the other sections.  The three appendices are also of a somewhat advanced nature.  These appendices and the Foreword are addressed mainly to readers who already have some knowledge of symbolic logic.
 
 The sections concerned with modal logic, namely, 11, 12, 13, and 23, can be omitted if desired, since the other sections do not depend essentially on them.
 
-I am greatly indebted to my past teachers and to my present colleagues and students for their inspiring interest in logic and philosophy and for their helpful insights and suggestions.  I am also, of course, greatly indebted to many contemporary writers in logic and allied fields.  In some ways my debt is greatest to Professor Filmer S. C. Northrop, since he made clear to me the importance of modern logic and guided my first work in it.  Some of the fundamental ideas of this system of logic were conceived during the tenure of a John Simon Guggenheim Memorial Fellowship in 1945-1946.
+I am greatly indebted to my past teachers and to my present colleagues and students for their inspiring interest in logic and philosophy and for their helpful insights and suggestions.  I am also, of course, greatly indebted to many contemporary writers in logic and allied fields.  In some ways my debt is greatest to Professor Filmer S. C. Northrop, since he made clear to me the importance of modern logic and guided my first work in it.  Some of the fundamental ideas of this system of logic were conceived during the tenure of a John Simon Guggenheim Memorial Fellowship in 1945–1946.
 
 Thanks are due to Miss Erna F. Schneider for her careful reading of a large part of the manuscript.  She made numerous useful suggestions.  I am also very grateful to Dr.\ John R. Myhill for studying some of the more difficult portions of the manuscript, for pointing out some logical and typographical errors, and for making various constructive criticisms.  I wish to thank Mr.\ I. Sussmann for calling my attention to typographical errors, and Miss Mabel R. Weld for her help in typing the manuscript.  Various members of the Yale philosophy department also made helpful suggestions regarding the general scheme of the book.  I am indebted to Mr.\ Herbert P. Galliher and Mr.\ Abner E. Shimony for valuable comments on the manuscript.
 
@@ -92,6 +120,49 @@ Thanks are due to Miss Erna F. Schneider for her careful reading of a large part
 \noindent New Haven, Conn.
 
 February, 1952
+
+\chapter*{Foreword}
+\chaptermark{Foreword}
+
+Five outstanding characteristics of the system of logic of this book are as follows:
+
+(1) It is a system that can be proved free from contradiction, so there is no danger of any of the standard logical paradoxes arising in it, such as Russell's paradox or Burali-Forti's paradox.  In Sections 20 and 27 a proof will be given of the consistency of as much of the system as is presented in the present volume.  In Appendix B a proof of the consistency of the rest of the system is outlined.
+
+(2) The system seems to be adequate for all of mathematics essential to the natural sciences.  The main principles of mathematical analysis will be derived in a subsequent volume.  Apparently no other system of logic, adequate for as large a portion of standard mathematics, is now known to be free from contradiction.
+
+(3) The system is not encumbered by any “theory of types”.  The disadvantage of a theory of types is that it treats as “meaningless” all propositions that are concerned with attributes or classes in general.  A logic with a theory of types is of little or no use in philosophy, since philosophy must be free to make completely general statements about attributes and classes.  A theory of types also has the disadvantage of ruling out as “meaningless” some philosophically important types of argument which involve propositions that have the character of referring directly or indirectly to themselves.  In Appendix C there is a discussion of the nature and importance of these self-referential propositions.  Furthermore, a theory of types, if viewed as applying to all classes, cannot itself even be stated without violating its own principles.  Such a statement would be concerned with all classes and so would be meaningless according to the principles of such a theory of types itself.  This point has been made by Paul Weiss\footnote{Paul Weiss, “The Theory of Types”, Mind, n.s., vol.\ 37 (1928), pp.\ 338–48.} and myself\footnote{F. B. Fitch, “Self-Reference in Philosophy”, Mind, n.s., vol.\ 55 (1946), pp.\ 64–73.  This article is reprinted in Appendix C.}.
+
+(4) The system employs the “method of subordinate proofs”, a method that vastly simplifies the carrying out of complicated proofs and that enables the reader to gain rapidly a real sense of mastery of symbolic logic.
+
+(5) The system is a “modal logic”; that is, it deals not only with the usual concepts of logic, such as conjunction, disjunction, negation, abstraction, and quantification, but also with logical necessity and logical possibility.
+
+No great stress is laid on the contrast between syntax and semantics, or on the finer points concerning the semantical use of quotation marks.  The reason for this is that such emphasis very often produces unnecessary difficulties in the mind of a person first approaching the subject of symbolic logic, and inhibits his ability to perform the fundamental operations with ease.  The use of quotation marks will be found to be rather informal.  This is done deliberately for pedagogical convenience.  The semantical paradoxes, incidentally, are avoided by this system of logic in the same way that it avoids the purely logical and mathematical paradoxes.
+
+Numerous exercises have been provided. Even the logically sophisticated reader will get a better understanding of the material by doing some of the exercises.
+
+In comparing this system with some other well-known systems, it can be said to appear to be superior to the Whitehead-Russell system,\footnote{A. N. Whitehead and Bertrand Russell, \textit{Principia Mathematica}, 3 vols., Cambridge, England, 1910, 1912, 1913. Second edition, 1925, 1927. Reprinted 1950.} at least with respect to its demonstrable consistency and its freedom from a theory of types.  In place of Russell's “vicious circle principle”\footnote{\textit{Principia Mathematica}, Chapter II of the Introduction to the first edition.} for avoiding paradoxes, my system uses a weakened law of excluded middle (see 10.16 and 10.19) and the following novel principle: A proposition \(p\) is not to be regarded as validly proved by a proof that makes essential use of the fact that some proposition other than \(p\) follows logically from \(p\).  This principle is reminiscent of the classical prohibition against treating a proposition as true simply because it implies another proposition that is true.  My principle, however, makes no stipulation about the truth or falsity of the proposition implied by p.  (See 18.6 for a technical statement of this principle.)
+
+The demonstrable consistency of the present system is also an important point in its favor when compared with the “set-theoretical” logics proposed by Zermelo,\footnote{Ernst Zermelo, “Untersuchungen über die Grundlagen der Mengenlehre I”, \textit{Math.\ Annalen}, vol.\ 65 (1908), pp.\ 261–81.} Fraenkel,\footnote{Adolf Fraenkel, “Untersuchungen über die Grundlagen der Mengenlehre”, \textit{Math.\ Z.}, vol.\ 22 (1925), pp.\ 250–73.} von Neumann,\footnote{J. von Neumann, “Eine Axiomatisierung der Mengenlehre”, \textit{Jour.\ r.\ angew.\ Math.}, vol.\ 154 (1925), pp.\ 219–40; “Die Axiomatisierung der Mengenlehre”, \textit{Math.\ Z.}, vol.\ 27 (1928), pp.\ 669–752.} and Bernays.\footnote{Paul Bernays, “A System of Axiomatic Set Theory”, \textit{Journal of Symbolic Logic}, vol.\ 2 (1937), pp.\ 65–77; vol.\ 6 (1941), pp.\ 1–17; vol.\ 7 (1942), pp.\ 65–89, 133–45; vol.\ 8 (1943), pp.\ 89–106; vol.\ 13 (1948), pp.\ 65–79.}  These logics are widely used by mathematicians but are not known to be free from contradiction.  Even these systems, in their most fully developed forms, employ what is almost a theory of types.  For example, in Gödel's reformulation\footnote{Kurt Gödel, \textit{The Consistency of the Continuum Hypothesis}, Princeton, 1940.} of the Bernays system, the distinction between “set”, “class”, and “notion” is very much like the distinction between three successively higher “types” or “orders”.
+
+Quine\footnote{For example, the system of W. V. Quine's book, \textit{Mathematical Logic} (New York, 1940).  See also his paper, “New Foundations for Mathematical Logic”, \textit{American Mathematical Monthly}, vol.\ 44 (1937), pp.\ 70–80.  For a discussion of Quine's systems in connection with problems of consistency, see Hao Wang, “A Formal System of Logic”, \textit{Journal of Symbolic Logic}, vol.\ 15 (1950), pp.\ 25–32.} has constructed various interesting and elegant systems that bear close affiliations with the Whitehead-Russell logic and with the set-theoretic logics just mentioned.
+
+All these systems with which the present system is being compared are characterized by the fact that none of them permits the formation of attributes or classes with the ease and freedom allowed by the rules stated in Section 17.  (See in particular 17.4 and 17.5.)  The restrictions imposed on this freedom by other systems seem arbitrary and philosophically unconvincing.
+
+The method of subordinate proofs was suggested by techniques due to Gentzen\footnote{Gerhard Gentzen, “Untersuchungen über das logische Schliessen”, \textit{Math.\ Z.}, vol.\ 39 (1934), pp.\ 176–210, 405–31.} and Jaśkowski.\footnote{Stanislaw Jaśkowski, “On the Rules of Suppositions in Formal Logic”, \textit{Studia Logica}, No.\ 1, Warsaw, 1934.}  It has various pedagogical advantages and also facilitates comparison of the theory of negation of this book with the theory of negation of the intuitionistic logic of Heyting,\footnote{A. Heyting, “Die formalen Regeln der intuitionistischen Logik”, \textit{Sitzungsberichte der Preussischen Akademie der Wissenschaften} (Physicalisch-mathematische Klasse), 1930, pp.\ 42–56.  See also, \textit{ibid.}, pp.\ 57–71, 158–69.} as is shown in Section 10.  This method has been used in my teaching for the past eleven years.
+
+The treatment of modality is very similar to that employed by Lewis and Langford\footnote{C. I. Lewis and C. H. Langford, \textit{Symbolic Logic}, New York, 1932.} and by Ruth Barcan Marcus,\footnote{Ruth C. Barcan (Ruth Barcan Marcus), “A Functional Calculus of First Order Based on Strict Implication”, \textit{Journal of Symbolic Logic}, vol.\ 11 (1946), pp.\ 1–16.  See also, \textit{ibid.}, pp.\ 115–18; vol.\ 12 (1947), pp.\ 12–15.} but the subordinate proof technique in this connection is an innovation.
+
+The system of this book is closely similar to, and in certain important respects an improvement on, the system of my paper, “An Extension of Basic Logic”,\footnote{\textit{Journal of Symbolic Logic}, vol.\ 13 (1948), pp.\ 95–106.} and that of my paper, “A Further Consistent Extension of Basic Logic”.\footnote{\textit{Ibid.}, vol.\ 14, No.\ 4 (1950), pp.\ 209–18.}  The improvement over both the latter systems consists in a more adequate theory of implication and the restriction of all proofs to finite length, so that the resulting logic can be said to be “finitary”.  Analogues of the rules [\(\#\)], [\(\neg\#\)], [\(*\)], and [\(\neg *\)] of 3.1 of “An Extension of Basic Logic” (and of the rules 3.28 and 3.29 of the other paper) are not given in the main body of this volume, but they are stated in Appendix B as rules R41–R44.  These rules together with R45 complete the total of forty-five rules needed for formulating the whole system.  An outline is given in Appendix B of a consistency proof for this total system.  A derivation of the more important theorems of mathematical analysis from these forty-five rules can proceed along the lines of my papers, “The Heine-Borel Theorem in Extended Basic Logic”\footnote{\textit{Ibid.}, vol.\ 14, No.\ 1 (1949), pp.\ 9–15.} and “A Demonstrably Consistent Mathematics”.\footnote{\textit{Ibid.}, vol.\ 15, No.\ 1 (1950), pp.\ 17–24; vol.\ 16, No.\ 2 (1951), pp.\ 121–4.}  This will be done in detail in a subsequent volume.  The systems of logic of the two papers just cited are non-finitary, while the system based on the forty-five rules has the asset of being finitary.
+
+\tableofcontents
+
+\mainmatter
+\pagestyle{headings}
+\chapter{Symbolic Logic and Formal Proofs}
+
+\section{Introduction}
+
+\lipsum
 \end{document}
 
 % Local Variables:
