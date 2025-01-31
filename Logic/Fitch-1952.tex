@@ -1,8 +1,16 @@
 \newif\ifbsixpaper
 \bsixpapertrue
 \ifbsixpaper
-\documentclass[]{book}
-\usepackage[b6paper,paperheight=7.5in,hmargin=.4in,vmargin=.6in]{geometry}
+\documentclass{book}
+\usepackage[
+  b6paper,
+  paperheight=7.367in,
+  hmargin=.4in,
+  top=.55in,
+  bottom=.5in,
+  headsep=1.5ex,
+  footskip=3ex
+]{geometry}
 \else
 \documentclass[a4paper]{book}
 \usepackage[hmargin=1.5in,vmargin=1in]{geometry}
@@ -17,12 +25,17 @@
 \author{\authorContent}
 \date{}
 
-% \usepackage{setspace}
-
 \usepackage[pagestyles]{titlesec}
+
 \titleclass{\chapter}{top}
-\titleformat{\chapter}[block]{\centering\normalfont\large}{{Chapter \thechapter\\[1em]}}{0pt}{\MakeUppercase}
-\titlespacing{\chapter}{0pt}{48pt}{10pt}
+\titleformat{\chapter}[display]{\centering\large}{%
+  Chapter \thechapter}{1ex}{\normalsize\MakeUppercase}
+\titlespacing{\chapter}{0pt}{40pt}{10pt}
+\titleformat{\section}[block]{\centering\bfseries}{\thesection.}{1ex}{}
+\titlespacing{\section}{0pt}{*1}{1ex minus 1ex}
+\titleformat{\subsection}[runin]{\bfseries}{\indent\thesubsection.}{0pt}{}
+\titlespacing{\subsection}{0pt}{0pt plus 3pt}{1ex}
+
 \newpagestyle{fmatter}[\footnotesize]{
   \sethead[\thepage][\MakeUppercase{\chaptertitle}][]
   {}{\chaptertitle}{\thepage}}
@@ -30,7 +43,13 @@
   \sethead[\thepage][\MakeUppercase{\titleContent}][\lbrack Ch.\ \thechapter]
   {Ch.\ \thechapter\rbrack}{\chaptertitle}{\thepage}}
 
-\usepackage{lipsum}
+\usepackage{chngcntr}
+\counterwithout{section}{chapter}
+
+\usepackage{enumitem}
+\newlist{abcd}{enumerate}{1}
+\setlist[abcd]{label=\Alph*.,left=2\parindent,nosep,topsep=3pt}
+\setlist[enumerate,1,2]{nosep}
 
 \usepackage{xcolor}
 \usepackage[
@@ -99,7 +118,7 @@
 \end{center}
 % \vspace*{\stretch{.2}}
 
-\chapter*{Preface}
+\chapter*{\vspace*{3ex}Preface}
 \chaptermark{Preface}
 
 This book is intended both as a textbook in symbolic logic for undergraduate and graduate students and as a treatise on the foundations of logic.  Much of the material was developed in an undergraduate course given for some years in Yale University.  The course was essentially a first course in logic for students interested in science.  Many alternative devices and methods of presentation were tried.  Those included here are the ones that seemed most successful.
@@ -154,17 +173,188 @@ The treatment of modality is very similar to that employed by Lewis and Langford
 
 The system of this book is closely similar to, and in certain important respects an improvement on, the system of my paper, “An Extension of Basic Logic”,\footnote{\textit{Journal of Symbolic Logic}, vol.\ 13 (1948), pp.\ 95–106.} and that of my paper, “A Further Consistent Extension of Basic Logic”.\footnote{\textit{Ibid.}, vol.\ 14, No.\ 4 (1950), pp.\ 209–18.}  The improvement over both the latter systems consists in a more adequate theory of implication and the restriction of all proofs to finite length, so that the resulting logic can be said to be “finitary”.  Analogues of the rules [\(\#\)], [\(\neg\#\)], [\(*\)], and [\(\neg *\)] of 3.1 of “An Extension of Basic Logic” (and of the rules 3.28 and 3.29 of the other paper) are not given in the main body of this volume, but they are stated in Appendix B as rules R41–R44.  These rules together with R45 complete the total of forty-five rules needed for formulating the whole system.  An outline is given in Appendix B of a consistency proof for this total system.  A derivation of the more important theorems of mathematical analysis from these forty-five rules can proceed along the lines of my papers, “The Heine-Borel Theorem in Extended Basic Logic”\footnote{\textit{Ibid.}, vol.\ 14, No.\ 1 (1949), pp.\ 9–15.} and “A Demonstrably Consistent Mathematics”.\footnote{\textit{Ibid.}, vol.\ 15, No.\ 1 (1950), pp.\ 17–24; vol.\ 16, No.\ 2 (1951), pp.\ 121–4.}  This will be done in detail in a subsequent volume.  The systems of logic of the two papers just cited are non-finitary, while the system based on the forty-five rules has the asset of being finitary.
 
+\setcounter{tocdepth}{1}
 \tableofcontents
 
 \mainmatter
 \pagestyle{headings}
+
+\vspace*{\stretch{1}}
+\begin{center}
+  \Large\bfseries\MakeUppercase{Symbolic Logic}
+\end{center}
+\vspace*{\stretch{2}}
+
+\thispagestyle{empty}
+\clearpage
+\thispagestyle{empty}
+\cleardoublepage
+
 \chapter{Symbolic Logic and Formal Proofs}
+\label{chap:1}
 
 \section{Introduction}
+\label{sec:1}
 
-\lipsum
+\subsection{}
+\label{sec:1.1}
+
+Modern deductive logic, also known as “symbolic logic” or “mathematical logic”, arose in the nineteenth century from earlier systems of logic, especially Aristotelian logic, and from traditional mathematics.  In a sense it now embraces all these sources from which it came.  The Aristotelian forms of inference appear within it as special cases of more general forms of reasoning, while the laws of mathematics are likewise derivable within it.  Symbolic logic also represents an important advance beyond Aristotelian logic and ordinary mathematics.  It surpasses the former in being able to deal far more adequately with complicated relational structures.  It surpasses the latter in being able to deal more powerfully with non-quantitative concepts.  The non-quantitative concepts handled by mathematics tend to be fairly direct generalizations from quantitative concepts, while symbolic logic can deal in addition with non-quantitative concepts that are not generalizations of this sort.
+
+\subsection{}
+\label{sec:1.2}
+
+No satisfactory theory of relations is provided by Aristotelian logic.  The only relations that were even partly amenable to genuine logical treatment in past centuries were the familiar numerical and geometrical relations of mathematics, together with the relation of identity and some relations of implication and class-inclusion.
+
+\subsection{}
+\label{sec:1.3}
+
+When philosophers of the past attempted to exploit this fact that mathematical relations were, for them, almost the only relations that could be handled with logical precision, the tendency was toward a quantitative view of the universe.  The emphasis was on geometry or on materialism, or on both.  Often there was a deprecation of the unmeasurable qualitative and aesthetic factors in the world, factors, which are the special concern of art, literature, and religion.  One way of deprecating them was to say that they were “merely in the mind” and hence “subjective” and “unreal”.  This did not actually dispose of them however, because the mind and its contents are themselves part of the universe.
+
+\subsection{}
+\label{sec:1.4}
+
+When identity and implication, rather than mathematical relations, were the relations most emphasized by philosophers, and when relatedness was treated as disguised or partial identity or implication, the tendency was toward monism (“All is one”) and toward an exaggeration of the importance of the whole of the universe at the expense of the parts.  Implication itself was often viewed as a kind of partial identity, so that one thing implied another if the latter was identical with part of the former.  Thus all relatedness reduced to identity, and the final identity was identity with the final one reality.  Differences tended to be treated as illusory, but there was always the residual problem of how there could be even illusory differences and how these illusory differences could be related to each other and to the one reality without becoming identical with each other and with the one reality.  If such a philosophy becomes politically influential, its outcome is likely to be totalitarianism.  The totalitarianism of Hitler can perhaps be regarded as derived in some degree from Hegel's monism.  The totalitarianism of Stalin is clearly derived from Hegel by way of Marx, who added an element of materialism to Hegel's philosophy.
+
+\subsection{}
+\label{sec:1.5}
+
+When no relations were particularly emphasized in philosophic thought, or at least none that could be easily handled by logical procedures then available, the tendency was toward a pluralism of loosely related “substances”, sometimes with God or “mind” or “pre-established harmony” serving as a relating factor.  Such a view, though deficient in some respects, at least would allow for the non-mathematical aspects of the world and would not tend to treat all differences as illusory and all political differences as undesirable.
+
+\subsection{}
+\label{sec:1.6}
+
+These various types of philosophy, when properly and sympathetically understood, are perhaps less divergent from one another and less defective than the inadequate systems of logic, on which they had to depend, forced them to appear to be.  With the extraordinary development of logic during the first half of the twentieth century, mankind for the first time finds itself in possession of a tool that is powerful enough to be of help in reasoning about relations and qualities of all sorts.  There have already been applications of symbolic logic to problems in biology,\footnote{J. H. Woodger, \textit{The Axiomatic Method in Biology} (Cambridge: Cambridge University Press, 1937).  Also, “Technique of Theory Construction”, International Encyclopedia of Unified Science (Chicago, 1939).} neurophysiology,\footnote{W. S. McCulloch and W. Pitts, “A Logical Calculus of the Ideas Immanent in Nervous Activity”, \textit{Bulletin of Mathematical Biophysics}, vol.\ 5 (1943), pp.\ 115–33.} engineering,\footnote{C. E. Shannon, “A Symbolic Analysis of Relay and Switching Circuits”, \textit{Transactions of the American Institute of Electrical Engineers}, vol.\ 57 (1938), pp.\ 713–23.} psychology,\footnote{C. L. Hull, C. I. Hovland, \textit{et al.}, \textit{Mathematico-Dedudive Theory of Rote Learning} (New Haven, 1940).} and philosophy.\footnote{W. V. Quine, “On What There Is”, \textit{Review of Metaphysics}, vol.\ 2 (1948), pp.\ 21–38.  Also, F. B. Fitch, “Actuality, Possibility, and Being”, \textit{ibid.}, vol.\ 3 (1949), pp.\ 367–84.  The writings of Rudolf Carnap should also be mentioned; for example, \textit{Meaning and Necessity} (Chicago, 1947).}  Some day it may be possible for experts in symbolic logic to think as clearly and as effectively about social, moral, and aesthetic concepts as experts in mathematics have long been able to do with respect to the “colorless” ideas of physics.  The full impact of the new science of logic has not yet been felt.  This is partly because its theoretical development is not yet complete, and partly because it has not yet been learned by many who could most profitably use it.  When its impact is felt, a richer, more human, and more rational philosophy may gradually arise.  The day may come when it will be as improper to study ethics and politics without a thorough grounding in symbolic logic as it now is to study physics without a thorough grounding in mathematics.  Man's ingenuity in devising a workable system of world peace may then have a chance of equaling his ingenuity in devising the atomic bomb.
+
+\subsection{}
+\label{sec:1.7}
+
+If the pages of this book seem rather technical, so are the pages of any reputable book on mathematics or physics.  Philosophy is no less technical than physics.  It deals with even more of the world than physics does; in fact, with everything.  We should not expect the logic suitable for philosophy, ethics, and aesthetics to be very much less technical than the mathematics suitable for physics and chemistry.
+
+\section{The Nature of Propositions}
+\label{sec:2}
+
+\subsection{}
+\label{sec:2.1}
+
+Certain combinations of words constitute word groups called “sentences”.
+
+\subsection{}
+\label{sec:2.2}
+
+Every sentence has one or more “meanings”, depending on how it is interpreted.  Thus the sentence, “He can put two and two together”, obviously has more than one meaning.  We shall restrict our attention to sentences which have only one meaning, or at least we shall assume that there is always a preferred or intended meaning which we shall call “the meaning” of the sentence.  We will not attempt to discuss here the difficult problem of how meaning is communicated.
+
+\subsection{}
+\label{sec:2.3}
+
+Meanings of sentences may also be called “verbalized propositions”.  Every verbalized proposition is the meaning of some sentence.  Roughly speaking, a proposition is anything that might conceivably be the meaning of some sentence, whether or not the requisite sentence has ever been formulated or uttered, and hence whether the proposition is verbalized or not.  We often have vague feelings or premonitions that we cannot easily express in words.  These are unverbalized propositions.
+
+\subsection{}
+\label{sec:2.4}
+
+Some sentences are true and others are false.  The meaning of a true sentence is a true proposition, and the meaning of a false sentence is a false proposition.  The meaning of the sentence, “The earth revolves around the sun”, is the true proposition that the earth does revolve around the sun.  The sentence, “Hydrogen is heavier than oxygen”, has as its meaning a false proposition.
+
+\subsection{}
+\label{sec:2.5}
+
+Propositions can be objects of belief and disbelief.  Thus someone may believe the false proposition expressed by the sentence, “The earth is flat”, while someone else may disbelieve this same proposition.
+
+\subsection{}
+\label{sec:2.6}
+
+Sentences are usually referred to by writing them in quotation marks, as has been done above.  A proposition may be referred to by first writing in quotation marks a sentence that means the proposition, and by then referring to the proposition as the meaning of the quoted sentence.  A second method is to use a subordinate noun clause expressing the meaning of the sentence.  According to the first method, we would speak of the proposition expressed by the sentence, “The earth is flat”.  According to the second method, we would speak of the proposition that the earth is flat.  Both methods are used in paragraph \ref{sec:2.4}.  Similarly, we might say that Columbus did not believe the proposition expressed by the sentence, “The earth is flat”, or we might equally well say that Columbus did not believe the proposition that the earth is flat.  Still more briefly, we could say that Columbus did not believe that the earth is flat.  A still different method is to say that Columbus did not believe the proposition, “The earth is flat”.  This is simply a shorthand way of saying that Columbus did not believe the proposition expressed by the sentence, “The earth is flat”.
+
+\subsection{}
+\label{sec:2.7}
+
+True propositions may also be called “facts” or “truths”.  Thus it is a true proposition that the earth is not flat, and it is also a truth and a fact that the earth is not flat.
+
+\subsection{}
+\label{sec:2.8}
+
+False propositions may be called “untruths” or “counterfacts”.  It is an untruth that the earth is flat.  Similarly, it is an untruth that \(4 + 4 = 9\), while it is a fact (or truth) that \(4 + 4 = 8\).
+
+\subsection{}
+\label{sec:2.9}
+
+There are two important kinds of facts (or truths): contingent facts and non-contingent facts.  Contingent facts are true without being true by logical necessity, while non-contingent facts are true by logical necessity.  Thus it is true that men discovered the usefulness of fire, but this discovery was the outcome of practical necessity and not of logical necessity.  Indeed, some savage tribes are said not to have made this discovery yet.  So it is only a contingent fact that men discovered the usefulness of fire.  On the other hand it is true by logical necessity that \(1 + 1 = 2\), so \(1 + 1 = 2\) is a non-contingent fact.  Logic and mathematics are concerned mainly with non-contingent facts.  The other special sciences and arts deal mainly with contingent facts.  Philosophy deals with both kinds of facts in their interrelationships.
+
+\subsection{}
+\label{sec:2.10}
+
+Some thinkers have advocated the view that all facts are contingent and that what appear to be non-contingent, logically necessary truths, are merely arbitrary conventions about the use of symbols, or are somehow merely the outcome of such conventions.  Thus they might say that \(2 + 2 = 4\) is necessarily true only because, and only in the sense that, we have agreed by an arbitrary convention to use the symbols “\(2\)”, “\(+\)”, “\(=\)”, and “\(4\)” in this way.  The only necessity they would find in such an equation would be the necessity of accepting conventions we have agreed to accept.  This view has never been developed very satisfactorily, or in sufficient detail, in my opinion.  For the purposes of this book, therefore, I shall continue to adhere to my own view that there are non-contingent truths as well as contingent truths, and that non-contingent truths are something other than the outcome of mere conventions.
+
+\subsection{}
+\label{sec:2.11}
+
+We will also assume that there are propositions which, by logical necessity, are false, for example, \(2 + 2 = 5\).  These propositions are non-contingent untruths.
+
+\subsection{}
+\label{sec:2.12}
+
+Furthermore, we shall assume that there are some propositions which are not to be asserted as true or false.  Examples of these will be given later.  They will be called “indefinite” propositions.  Propositions which are true or false will be called “definite” propositions.  The “principle of excluded middle” asserts that all proposi tions are true or false.  This principle will not be asserted here except in the limited sense of applying to definite propositions.
+
+\subsection{}
+\label{sec:2.13}
+
+The classification of propositions as so far given may be outlined as follows:
+\begin{abcd}
+\item Definite.
+  \begin{enumerate}
+  \item True.
+    \begin{enumerate}
+    \item Necessarily true.
+    \item Contingently true.
+    \end{enumerate}
+  \item False.
+    \begin{enumerate}
+    \item Necessarily false.
+    \item Contingently false.
+    \end{enumerate}
+  \end{enumerate}
+\item Indefinite.
+\end{abcd}
+
+\subsection{}
+\label{sec:2.14}
+
+An example of an indefinite proposition is the proposition expressed by the sentence, “This proposition itself is false”.  The latter proposition cannot be assumed true without also being assumed false, nor can it be assumed false without also being assumed true.  If such a proposition is regarded as satisfying the principle of excluded middle, then it must be treated as either true or false, and hence as both true and false.  So we do not assert that it satisfies the principle of excluded middle.
+
+\subsection{}
+\label{sec:2.15}
+
+Propositions are not to be thought of as located in space and time.  Consider, for example, the true proposition, or fact, that the earth revolves around the sun.  The sun has a location in space and time, and the earth has a location in space and time, but the fact that the earth revolves around the sun does not have any genuine location in space and time.  If we were to try to assign this fact to some specific region of space time, the exact limits of such a region would be impossible to specify.  Similarly, the fact that grass is green is not located anywhere, though grass itself and other green things do have location.  Just as facts or truths have no space-time location, so also counterfacts or untruths have no location in space and time.  The untruth that \(2 + 2 = 5\) has no more location than the truth that \(2 + 2 = 4\).  It is a mistake to argue that because propositions have no location in space and time there can be no such things as propositions.  The word “thing” does not have to be used in such a narrow way as to mean only “thing located in space time”.  Numbers themselves are in a sense “things” but are not located anywhere.  Marks standing for numbers may have location, as on a blackboard, and measurements involving numbers may characterize located objects.
+
+\subsection{}
+\label{sec:2.16}
+
+Propositions, finally, are not to be thought of as “merely mental” things.  The fact that the earth goes around the sun is not just a mental thing.  In other words, propositions are no more “located in the mind” than they are located in space and time.  But the mind may be in relationship to various propositions, as when it believes or disbelieves them.  The mind may also be in relationship to various objects that do have space-time location.
+
+\section{Complex If-Then Propositions}
+\label{sec:3}
+
+\subsection{}
+\label{sec:3.1}
+
+Given any two propositions, we may combine them into a compound proposition by use of such conjunctions as “and”, “or”, “but”.  Thus the proposition that roses are red and the proposition that violets are blue may be combined to give the proposition that roses are red and violets are blue.  In general, if we let “\(p\)” and “\(q\)” stand for any two propositions, then “\(p\) and \(q\)” can stand for the proposition expressed by the sentence that results from writing “and” between the sentences expressing these two propositions, and “\(p\) or \(q\)” can stand for the proposition expressed by the sentence that results from writing “or” between the sentences expressing these two propositions, and so on for other conjunctions or conjunctive phrases such as “but”, “if”, “only if”, “if and only if”, “so”, “therefore”, and others.  For greater clarity the compound proposition “\(p\) and \(q\)” will hereafter be written with square brackets as follows: [\(p\) and \(q\)].  Similarly, “\(p\) or \(q\)” will be written, [\(p\) or \(q\)].  (See 6.1 and 8.1.)
+
+\subsection{}
+\label{sec:3.2}
+
+Another very important conjunctive phrase is the phrase, “if~.~.~. then .~.~.\,”\,.  The triple dots indicate where the two sentences are to be placed which the phrase can serve to join.  Thus from the proposition, “Roses are red”, and the proposition, “Violets are blue”, we may form the compound proposition, “If roses are red then violets are blue”.  This resulting proposition can be written, [If (roses are red) then (violets are blue)].  The parentheses merely serve to set off the smaller propositions out of which the larger proposition is compounded.  Notice that we are simply considering methods of compounding propositions into larger and more complex propositions, regardless of the truth or falsity of the larger propositions thus obtained.  Here are some further examples of propositions that have been compounded out of smaller propositions:
+\begin{description}[left=2\parindent,itemindent=-\parindent,labelsep=0pt, nosep,topsep=3pt]
+\item If one and one make two, then one and one make three.
+\item If Socrates is a man and all men are mortal, then Socrates is mortal.
+\item If Jack loves Jill, then Jill loves Jack.
+\item If F. D. Roosevelt is elected, then Henry agrees to eat his own hat.
+\end{description}
+
+\chapter{The Method of Subordinate Proofs}
+\label{chap:2}
+
 \end{document}
 
 % Local Variables:
 % TeX-engine: luatex
+% fill-column: 80
 % End:
