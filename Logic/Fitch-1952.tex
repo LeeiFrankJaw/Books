@@ -49,7 +49,14 @@
 \usepackage{enumitem}
 \newlist{abcd}{enumerate}{1}
 \setlist[abcd]{label=\Alph*.,left=2\parindent,nosep,topsep=3pt}
-\setlist[enumerate,1,2]{nosep}
+\setlist[enumerate,1]{left=0pt,nosep}
+\setlist[enumerate,2]{nosep}
+
+% https://www.logicmatters.net/resources/fitch.sty
+% https://www.logicmatters.net/resources/fitchguide.txt
+\usepackage{fitch}
+\setlength{\fitchnumwd}{2pt}
+% \setlength{\fitchindent}{0pt}
 
 \usepackage{xcolor}
 \usepackage[
@@ -342,12 +349,165 @@ Given any two propositions, we may combine them into a compound proposition by u
 \label{sec:3.2}
 
 Another very important conjunctive phrase is the phrase, “if~.~.~. then .~.~.\,”\,.  The triple dots indicate where the two sentences are to be placed which the phrase can serve to join.  Thus from the proposition, “Roses are red”, and the proposition, “Violets are blue”, we may form the compound proposition, “If roses are red then violets are blue”.  This resulting proposition can be written, [If (roses are red) then (violets are blue)].  The parentheses merely serve to set off the smaller propositions out of which the larger proposition is compounded.  Notice that we are simply considering methods of compounding propositions into larger and more complex propositions, regardless of the truth or falsity of the larger propositions thus obtained.  Here are some further examples of propositions that have been compounded out of smaller propositions:
-\begin{description}[left=2\parindent,itemindent=-\parindent,labelsep=0pt, nosep,topsep=3pt]
+\begin{description}[left=2\parindent,itemindent=-2ex,labelsep=0pt, nosep,topsep=3pt]
 \item If one and one make two, then one and one make three.
 \item If Socrates is a man and all men are mortal, then Socrates is mortal.
 \item If Jack loves Jill, then Jill loves Jack.
 \item If F. D. Roosevelt is elected, then Henry agrees to eat his own hat.
 \end{description}
+
+\subsection{}
+\label{sec:3.3}
+
+For purposes of symbolic logic it is desirable to build up more and more complex propositions from relatively simple ones by repeated use of the if-then phrase.  In so doing, the simplest propositions will sometimes be set off by use of parentheses as was done in an example in the above paragraph, while compound propositions will be set off by use of square brackets.  Thus the second proposition in the above list could be written, [If [(Socrates is a man) and (all men are mortal)] then (Socrates is mortal)].  This is doubly compound.  It is of the general form, [If [p and q] then r].  Unless there is some indication to the contrary, the letters “\(p\)”, “\(q\)”, “\(r\)”, “\(s\)”, and “\(t\)” are always hereafter to be thought of as standing for propositions.
+
+\subsection{}
+\label{sec:3.4}
+
+Propositions built up by repeated use of various conjunctive phrases, including the if-then phrase, are often clumsy and inelegant from a literary standpoint, but they may be very useful tools in logical analysis.  The following sentence, though somewhat clumsy, expresses not only a genuine proposition but even a necessarily true one: “If Jack loves Jill, then, if Jill loves Tom, Jack loves Jill”.  In our special symbolism this proposition could be written, [If (Jack loves Jill) then [if (Jill loves Tom) then (Jack loves Jill)]].  The proposition can be stated in a more colloquial form somewhat as follows: “If Jack loves Jill, then even if Jill loves Tom, it is still true that Jack loves Jill”.  This proposition is of the general form, [If \(p\) then [if \(q\) then \(p\)]].  Any compound proposition of this form is a necessarily true proposition.  This is simply the principle that if a proposition is true, it is true regardless of what else may be the case.  Granted that \(p\) is true, then \(p\) is also true under the condition that \(q\) is true, no matter what the condition \(q\) may be.
+
+\subsection{}
+\label{sec:3.5}
+
+Accordingly any proposition of the form, [If \(p\) then [if \(q\) then \(p\)]], will be called an axiom, or more specifically, an \textbf{axiom of conditioned repetition}.  Every proposition which is an axiom of conditioned repetition is necessarily true.
+
+\subsection{}
+\label{sec:3.6}
+
+If \(p\) and \(q\) are propositions, we will say that the proposition \(q\) is a \textbf{direct consequence} of the pair of propositions,
+\begin{enumerate}[label=(\arabic*),left=2\parindent,topsep=1ex,itemsep=1pt]
+\item \label{3.item:1} \(p\),
+\item \label{3.item:2} [If \(p\) then \(q\)].
+\end{enumerate}
+More specifically, we will say that it is a direct consequence by the \textbf{rule of modus ponens}.  Clearly, if propositions \ref{3.item:1} and \ref{3.item:2} are both true, then \(q\) itself is true.  Furthermore, if \ref{3.item:1} and \ref{3.item:2} are both necessarily true, and not merely contingently true, then \(q\) must also be a necessary truth.  For example, the propositions \ref{3.item:3} and \ref{3.item:4} below are necessarily true.  Therefore \ref{3.item:5}, which is a direct consequence of them by modus ponens, is also a necessarily true proposition.
+\begin{enumerate}[resume*]
+\item \label{3.item:3} \(a + b = b + a\).
+\item \label{3.item:4} If \(a + b = b + a\), then \(c + (a + b) = c + (b + a)\).
+\item \label{3.item:5} \(c + (a + b) = c + (b + a)\).
+\end{enumerate}
+
+\subsection{}
+\label{sec:3.7}
+
+We regard modus ponens as a \textbf{rule of direct consequence} according to which one proposition is a direct consequence of a pair of other propositions.  Another rule of direct consequence will now be presented, \textbf{the rule of distribution}.  We will say that if \(p\), \(q\), and \(r\) are propositions, then the compound proposition \ref{3.item:7} below is a direct consequence of the compound proposition \ref{3.item:6} by distribution.
+\begin{enumerate}[resume*]
+\item \label{3.item:6} [If \(p\) then [if \(q\) then \(r\)]].
+\item \label{3.item:7} [If [if \(p\) then \(q\)] then [if \(p\) then \(r\)]].
+\end{enumerate}
+Suppose, for example, that \(p\) is the proposition, \(x = 2y\), and \(q\) is the proposition, 3y = z, and \(r\) is the proposition, 3x = 2z.  Then \ref{3.item:6} and \ref{3.item:7} are \ref{3.item:8} and \ref{3.item:9} as follows:
+\begin{enumerate}[resume*]
+\item \label{3.item:8} [If \(x = 2y\) then [if \(3y = z\) then \(3x = 2z\)]].
+\item \label{3.item:9} [If [if \(x = 2y\) then \(3y = z\)] then [if \(x = 2y\) then \(3x = 2z\)]].
+\end{enumerate}
+Here \ref{3.item:9} is a direct consequence of \ref{3.item:8} by distribution.  In general, a proposition that is a direct consequence of a true proposition by distribution is, itself, true; and a proposition that is a direct consequence of a necessarily true proposition by distribution is, itself, necessarily true.  In particular, \ref{3.item:8} is a necessary truth, so \ref{3.item:9} is also necessarily true.  Even if \(p\), \(q\), and \(r\) in \ref{3.item:6} and \ref{3.item:7} are so chosen that \ref{3.item:6} is not true, it is still the case that \ref{3.item:7} is a direct consequence of \ref{3.item:6} by distribution.
+
+\subsection{}
+\label{sec:3.8}
+
+In what follows we shall deal with propositions in very much the way that algebra deals with numbers, not always mentioning them explicitly, but rather representing them by letters.
+
+\section{Formal Proofs}
+\label{sec:4}
+
+\subsection{}
+\label{sec:4.1}
+
+In logic, as in mathematics, it is desirable to carry out proofs of theorems on the basis of various axioms which are supposed to be logically true.  The axioms can be chosen in various different ways, and also the rules of direct consequence whereby steps are taken from axioms to theorems or from theorems to other theorems.  Some of these differences of choice are extreme enough to give rise to different systems of logic.  Other differences of choice merely represent alternative techniques for formulating one and the same system or equivalent systems.  We say that two systems of logic are \textbf{equivalent} if every theorem of one is a theorem of the other, and vice versa.  A system of logic may be said to be \textbf{valid} if every one of its theorems is a necessarily true proposition.  Two systems of logic, incidentally, could not both be valid and also be such that some theorems of one contradict some theorems of the other.  But two valid systems could differ in the sense that some theorems of one are not theorems of the other.  Results due to Gödel\footnote{K. Godel, “Uber formal unentscheidbare Siitze der Principia Mathematica und verwandter Systeme I”, Monatshefte für Mathematik und Physik, vol.\ 38 (1931), pp.\ 173–98.} seem to indicate that no consistent system, formulated in the usual way, can encompass all logical truths among its theorems.  Thus we can formulate systems of logic that are more and more adequate, but never one that is adequate for all of logical truth.  Indeed, it is often very difficult to know whether or not some complicated proposition is to be regarded as logically true.  The decision often has to be made only in a tentative way and in the light of a careful study of many different systems of logic.
+
+\subsection{}
+\label{sec:4.2}
+
+The system of logic of the present book is defined relatively to a set of propositions which we will call the \textbf{axioms} of the system.  The set of axioms will not be completely specified at first, but it has already been partially specified in the sense that we have asserted in \ref{sec:3.5} that every axiom of conditioned repetition is one of our axioms.  The system of logic of the present book is defined also relatively to a set of \textbf{rules of direct consequence}.  These rules, also, will not be completely listed at first, but two of them have already been described, the rule of modus ponens and the rule of distribution.  Finally, the system of logic of the present book is defined relatively to a set of things which we will call \textbf{items}.  For the present we can say that all propositions are items.  Later some things other than propositions will be treated as items.
+
+\subsection{}
+\label{sec:4.3}
+
+By a \textbf{formal proof} will be meant a finite sequence of items (usually written as a vertical column or list) such that each item of the sequence satisfies at least one of the following two conditions:
+\begin{enumerate}[resume*,start=1]
+\item It is an axiom of the system.
+\item It is a direct consequence of preceding items of the sequence.
+\end{enumerate}
+
+\subsection{}
+\label{sec:4.4}
+
+If every axiom is a necessarily true proposition, and if every rule of direct consequence is such that a direct consequence of necessarily true items is itself necessarily true, then clearly each item of a formal proof must be necessarily true.  A formal proof will be said to be a formal proof of each of its items.  In particular, it will be said to be a formal proof of its last item.
+
+\subsection{}
+\label{sec:4.5}
+
+An example of a formal proof will be given in \ref{sec:4.6} below.  The letters “\(p\)”, “\(q\)”, “\(r\)” are used, as usual, to stand for any propositions.  The steps of the formal proof are numbered on the left, and a vertical line is drawn between these numbers and the list of items.  To the right of each item is written the “reason” or “justification” for its inclusion in the formal proof, namely, the kind of axiom it is if it is an axiom, or the rule of direct consequence according to which it is a direct consequence of preceding items.  In the latter case the numbers of the relevant preceding items should be stated.
+
+\subsection{}
+\label{sec:4.6}
+
+\leavevmode
+
+\noindent
+\begin{fitch}
+  \fa [If \(p\) then [if \(p\) then \(p\)]] & ax cond rep \\
+  \fa [If \(p\) then [if [if \(p\) then \(p\)] then \(p\)]] & ax cond rep \\
+  \fa [If [if \(p\) then [if \(p\) then \(p\)]] then [if \(p\) then \(p\)]] & 2, dist \\
+  \fa [If \(p\) then \(p\)] & 1, 3, m p
+\end{fitch}
+
+\subsection{}
+\label{sec:4.7}
+
+Observe that each of the four items of the above formal proof is necessarily true.  In particular, the last item is rather easily recognized as being necessarily true.  The abbreviations “ax cond rep”, “dist”, and “m p” mean, respectively, “axiom of conditioned repetition”, “rule of distribution”, and “rule of modus ponens”.  Item 4, for example, is a direct consequence of items 2 and 3 by the rule of modus ponens.  The formal proof \ref{sec:4.6} is a formal proof of the proposition, [If \(p\) then \(p\)].
+
+\subsection{}
+\label{sec:4.8}
+
+The notion of formal proof will now be extended in such a way that we will allow a formal proof to possess items called \textbf{hypotheses}.  A formal proof that has no hypothesis is still correctly described as in \ref{sec:4.3} and will be known as a \textbf{categorical proof}.  Formal proofs that possess one or more hypotheses will be known as \textbf{hypothetical proofs}.  Such a formal proof is, by definition, a finite sequence of items (usually written as a vertical column or list) such that the items which are the hypotheses precede all the others, and such that each item satisfies at least one of the following three conditions:
+\begin{enumerate}[resume*,start=1]
+\item It is an axiom of the system.
+\item It is a direct consequence of preceding items of the sequence.
+\item It is a hypothesis of the sequence.
+\end{enumerate}
+A proposition might appear as a hypothesis of the sequence and also appear subsequently in the sequence.  In its later appearance in the sequence, it could still be said to satisfy condition (3) above.  It will be customary to use the same notation in writing hypothetical proofs as in writing formal proofs that have no hypotheses, except that the hypotheses will be listed at the beginning and will be separated from the subsequent items by a short horizontal line or dash.  After each hypothesis we will write “hyp” to indicate its status.  Any finite number of items may be chosen to serve as the hypotheses of a hypothetical proof, but they must all be carefully listed and designated as such.  It is permissible for a hypothetical proof to have just a single proposition as its hypothesis.  The items of a hypothetical proof will not all be true unless the hypotheses are all true, and the items will not all be necessarily true unless the hypotheses are all necessarily true.  This is on the supposition that all our axioms are necessarily true and that our rules of direct consequence never provide a transition from items that are necessarily true to items that are not necessarily true, or from items that are true to items that are not true.  Some examples of hypothetical proofs will now be given.
+
+\medskip
+\subsection{}
+\label{sec:4.9}
+
+\begingroup
+\setlength{\fitchcomind}{5em}
+\begin{fitch}
+  \fh \(p\) & hyp \\
+  \fa [If \(p\) then [if \(q\) then \(p\)]] & ax cond rep \\
+  \fa [If \(q\) then \(p\)] & 1, 2, m p
+\end{fitch}
+\endgroup
+
+\medskip
+\subsection{}
+\label{sec:4.10}
+
+\leavevmode
+
+\noindent
+\begin{fitch}
+  \fh [If \(q\) then \(r\)] & hyp \\
+  \fa [If [if \(q\) then \(r\)] then [if \(p\) then [if \(q\) then \(r\)]]] & ax cond rep \\
+  \fa [If \(p\) then [if \(q\) then \(r\)]] & 1, 2, m p \\
+  \fa [If [if \(p\) then \(q\)] then [if \(p\) then \(r\)]] & 3, dist
+\end{fitch}
+
+\subsection{}
+\label{sec:4.11}
+
+For convenience and brevity, a more concise notation will now be introduced.  An expression of the form, “[If \(p\) then \(q\)]”, will hereafter be written as “[\(p \supset q\)]”.  The horseshoe symbol can be read as “implies”, but a more accurate reading is the \emph{if-then} reading.  Thus the proposition, [(It is raining) \(\supset\) (the ground is wet)], can be read as, “If it is raining, then the ground is wet”, or less accurately but often more conveniently as, “It is raining implies that the ground is wet”.  Using the horseshoe notation, we now rewrite \ref{sec:4.6}, \ref{sec:4.9}, \ref{sec:4.10}, respectively, as \ref{sec:4.12}, \ref{sec:4.13}, \ref{sec:4.14}.  It will be customary to omit the outermost pair of square brackets from each item of a formal proof.  In general, when propositions are displayed separately or are written in a list, we omit outermost square brackets.  We will call \ref{sec:4.12} the principle of \textbf{reflexivity of implication} (“refl imp”).  Strictly speaking, this principle is illustrated by the last step of \ref{sec:4.12} rather than by the whole of \ref{sec:4.12}.
+
+\subsection{}
+\label{sec:4.12}
+
+\begin{fitch}
+  \fa \(p \supset [p \supset p]\) & ax cond rep \\
+  \fa \(p \supset [[p \supset p] \supset p]\) & ax cond rep \\
+  \fa \([p \supset [p \supset p]] \supset [p \supset p]\) & 2, dist \\
+  \fa \(p \supset p\) & 1, 3, m p
+\end{fitch}
 
 \chapter{The Method of Subordinate Proofs}
 \label{chap:2}
@@ -356,5 +516,4 @@ Another very important conjunctive phrase is the phrase, “if~.~.~. then .~.~.\
 
 % Local Variables:
 % TeX-engine: luatex
-% fill-column: 80
 % End:
