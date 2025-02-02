@@ -19,13 +19,16 @@
 % Line number width
 \newlength{\fitchnumwd}
 \setlength{\fitchnumwd}{1em}
+\newlength{\fitchlinewd}
+\setlength{\fitchlinewd}{2in}
 
 % Altered from mdwtab.sty: shorter vline, for start of subproof
 \makeatletter
-\newcommand\fvline[1][\arrayrulewidth]{\vrule\@height.5\fitchlineht\@width#1\relax}
+\newcommand\fvline[1][\arrayrulewidth]{\vrule\@height.6\baselineskip\@width#1\@depth1ex\relax}
+\newcommand\favline[1][\arrayrulewidth]{\vrule\@height1.08\baselineskip\@width#1\@depth.3\baselineskip\relax}
 \makeatother
 % Ordinary vertical line
-\newcommand{\fa}{\vline\hspace*{\fitchindent}}
+\newcommand{\fa}{\favline\hspace*{\fitchindent}}
 % Vertical line, shorter: Use at start of (sub)proof
 \newcommand{\fb}{\fvline\hspace*{\fitchindent}}
 % Hypothesis
@@ -82,13 +85,14 @@
 \newenvironment{fitchnum}%
 {\ifthenelse{\boolean{resetfitchcounter}}{\setcounter{fitchcounter}{0}}{}%
   \begin{tabular}[t]{%
-    !{\makebox[\fitchnumwd][l]{\fitchcounter}}l@{\hspace{\fitchcomind}}l}}%
+    !{\makebox[\fitchnumwd][l]{\fitchcounter}}%
+    p{\fitchlinewd}@{\hspace{\fitchcomind}}l}}%
 {\end{tabular}}
 
 \newenvironment{fitchunum}%
 {\begin{tabular}[t]{%
-  !{\makebox[\fitchnumwd][r]{}\hspace{\fitchindent}}l@{%
-  \hspace{\fitchcomind}}l}}%
+  !{\makebox[\fitchnumwd][r]{}\hspace{\fitchindent}}%
+  p{\fitchlinewd}@{\hspace{\fitchcomind}}l}}%
 {\end{tabular}}
 
 \newenvironment{fitch}{%\renewcommand{\arraystretch}{1.5}
