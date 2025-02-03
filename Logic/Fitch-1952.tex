@@ -32,7 +32,10 @@
   Chapter \thechapter}{1ex}{\normalsize\MakeUppercase}
 \titlespacing{\chapter}{0pt}{40pt}{10pt}
 \titleformat{\section}[block]{\centering\bfseries}{\thesection.}{1ex}{}
+\titleformat{name=\section,numberless}[block]{%
+  \centering\bfseries}{}{0ex}{\MakeUppercase}
 \titlespacing{\section}{0pt}{*1}{1ex minus 1ex}
+\titlespacing{name=\section,numberless}{0pt}{*2}{1ex minus 1ex}
 \titleformat{\subsection}[runin]{\bfseries}{\indent\thesubsection.}{0pt}{}
 \titlespacing{\subsection}{0pt}{0pt plus 3pt}{1ex}
 
@@ -73,6 +76,14 @@
 
 \hyphenation{Physicalisch=mathe-matische}
 
+% \let\oldtextbf\textbf
+% \newcommand*{\textBF}[1]{\sbox0{#1}\resizebox{\wd0}{\ht0}{\oldtextbf{#1}}}
+% \let\textbf\textBF
+
+\makeatletter
+\let\openrightfalse\@openrightfalse
+\makeatother
+
 \AtBeginDocument{
   \setlength{\parindent}{10pt}
   \setlength{\parskip}{0pt plus 3pt}
@@ -82,6 +93,7 @@
 \frontmatter
 \pagestyle{fmatter}
 
+\currentpdfbookmark{Title Page}{titlepage}
 \begin{titlepage}
   \vspace*{\stretch{1}}
   \begin{center}
@@ -104,6 +116,7 @@
   \vspace*{\stretch{.5}}
 \end{titlepage}
 
+\currentpdfbookmark{Copyright Page}{copyright}
 \thispagestyle{empty}
 \vspace*{\stretch{3}}
 \begin{center}
@@ -127,6 +140,8 @@
 \end{center}
 % \vspace*{\stretch{.2}}
 
+\clearpage
+\currentpdfbookmark{Preface}{preface}
 \chapter*{\vspace*{3ex}Preface}
 \chaptermark{Preface}
 
@@ -149,6 +164,8 @@ Thanks are due to Miss Erna F. Schneider for her careful reading of a large part
 
 February, 1952
 
+\clearpage
+\currentpdfbookmark{Foreword}{foreword}
 \chapter*{Foreword}
 \chaptermark{Foreword}
 
@@ -568,21 +585,158 @@ Observe that steps 1 through 3 of \ref{sec:4.14} are exactly like steps 1 throug
 
 Observe that the notation “1, \ref{sec:4.13}”, at the right of step 2 in \ref{sec:4.17}, indicates that step 2 is obtainable from step 1 by the same method used to obtain the last step of \ref{sec:4.13} from the hypothesis of \ref{sec:4.13}.  In other words, there are missing steps in \ref{sec:4.17} which the reader can supply by referring to \ref{sec:4.13}.  Actually \ref{sec:4.17} is not, as written, a formal proof in the sense of \ref{sec:4.8}, unless the missing steps are inserted.  We can think of \ref{sec:4.17}, as written, as being an abbreviation for the full formal proof given in \ref{sec:4.14}.
 
-\smallskip
+% \smallskip
 \subsection{}
 \label{sec:4.19}
 
-A very useful hypothetical proof will next be presented.  It is seen to possess two hypotheses.  The formal proof will first be presented in full as \ref{sec:4.20}, and then in abbreviated form as 4.21.  This formal proof will be called the principle of the transitivity of implication (“trans imp”).  The reasons for the various steps in \ref{sec:4.20} and \ref{sec:4.21} are purposely omitted so that the reader may insert them as an exercise.
+A very useful hypothetical proof will next be presented.  It is seen to possess two hypotheses.  The formal proof will first be presented in full as \ref{sec:4.20}, and then in abbreviated form as 4.21.  This formal proof will be called the principle of the \textbf{transitivity of implication} (“trans imp”).  The reasons for the various steps in \ref{sec:4.20} and \ref{sec:4.21} are purposely omitted so that the reader may insert them as an exercise.
 
-\smallskip
+% \smallskip
 \subsection{}
 \label{sec:4.20}
 
-\smallskip
+\begin{fitch}
+  \fb \(p \supset q\) & % hyp
+  \\
+  \fj \(q \supset r\) & % hyp
+  \\
+  \fa \([q \supset r] \supset [p \supset [q \supset r]]\) & % ax cond rep
+  \\
+  \fa \(p \supset [q \supset r]\) & % 2, 3, m p
+  \\
+  \fa \([p \supset q] \supset [p \supset r]\) & % 4, dist
+  \\
+  \fa \(p \supset r\) & % 1, 4, m p
+\end{fitch}
+
+% \smallskip
 \subsection{}
 \label{sec:4.21}
 
+\begin{fitch}
+  \fb \(p \supset q\) & % hyp
+  \\
+  \fj \(q \supset r\) & % hyp
+  \\
+  \fa \([p \supset q] \supset [p \supset r]\) & % 2, \ref{sec:4.17}
+  \\
+  \fa \(p \supset r\) & % 1, 3, m p
+\end{fitch}
 
+% \smallskip
+\subsection{}
+\label{sec:4.22}
+
+Observe that the order of hypotheses does not make any difference.  Thus \ref{sec:4.21} could equally well have been written as follows:
+
+% \smallskip
+\subsection{}
+\label{sec:4.23}
+
+\begin{fitch}
+  \fb \(q \supset r\) & % hyp
+  \\
+  \fj \(p \supset q\) & % hyp
+  \\
+  \fa \([p \supset q] \supset [p \supset r]\) & % 2, \ref{sec:4.17}
+  \\
+  \fa \(p \supset r\) & % 1, 3, m p
+\end{fitch}
+
+% \smallskip
+\subsection{}
+\label{sec:4.24}
+
+Another useful hypothetical proof will next be presented.  It will be called the principle of \textbf{conditioned modus ponens} (“cond m p”).
+
+% \smallskip
+\subsection{}
+\label{sec:4.25}
+
+\begin{fitch}
+  \fb \(s \supset p\) & hyp \\
+  \fj \(s \supset [p \supset q]\) & hyp \\
+  \fa \([s \supset p] \supset [s \supset q]\) & 2, dist \\
+  \fa \(s \supset q\) & 1, 3, m p
+\end{fitch}
+
+\subsection{}
+\label{sec:4.26}
+
+In addition to those propositions which are axioms of conditioned repetition, some further propositions will now be counted as being axioms of this system.  These further propositions are all those of the form, [\(p_1 \supset p_2\)], where \(p_1\) and \(p_2\) have so been chosen that \(p_2\) is a direct consequence of \(p_1\) by distribution.  Such axioms will be called \textbf{distributive axioms} (“ax dist”).  Thus every proposition of the form, [\([p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]\)], is a distributive axiom.  Such an axiom is used in step 2 of \ref{sec:4.27} below.  We will call \ref{sec:4.27} the principle of \textbf{conditioned distribution} (“cond dist”).
+
+\subsection{}
+\label{sec:4.27}
+
+\leavevmode
+
+\noindent
+\begingroup
+\setlength{\fitchlinewd}{2.328in}
+\begin{fitch}
+  \fh \(s \supset [p \supset [q \supset r]]\) & hyp \\
+  \fa \([p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]\) & ax dist \\
+  \fa \( s \supset [[p \supset q] \supset [p \supset r]]\) & 1, 2, trans imp (\ref{sec:4.20})
+\end{fitch}
+\endgroup
+
+\subsection{}
+\label{sec:4.28}
+
+If we wished, we could now dispense entirely with the rule of distribution, since the same results can always be obtained by using the requisite distributive axiom together with the rule of modus ponens.  Thus we can make the transition from [\(p \supset [q \supset r]\)] to [\([p \supset q] \supset [p \supset r]\)] as in \ref{sec:4.29}.
+
+\subsection{}
+\label{sec:4.29}
+
+\begingroup
+\setlength{\fitchlinewd}{2.175in}
+\begin{fitch}
+  \fh \(p \supset [q \supset r]\) & hyp \\
+  \fa \([p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]\) & ax dist \\
+  \fa \([p \supset q] \supset [p \supset r]\) & 1, 2, m p
+\end{fitch}
+\endgroup
+
+\subsection{}
+\label{sec:4.30}
+
+The two following categorical proofs will be referred to subsequently in 5.21.
+
+\subsection{}
+\label{sec:4.31}
+
+\setlength{\fitchlinewd}{2.416in}
+\begin{fitch}
+  \fb \(p \supset [q \supset r]\) & ax cond rep \\
+  \fa \(s \supset [p \supset [q \supset r]]\) & 1, \ref{sec:4.13}
+\end{fitch}
+
+\subsection{}
+\label{sec:4.32}
+
+\begin{fitch}
+  \fb \([p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]\) & ax dist \\
+  \fa \(s \supset [p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]\) & 1, \ref{sec:4.13}
+\end{fitch}
+
+\subsection{}
+\label{sec:4.33}
+
+The theorems of the present system of logic are all those propositions for which there are categorical proofs.  For example, every proposition of the form, [\(p \supset p\)], is a theorem of this system, and so is every proposition of the form, [\([s \supset p] \supset [s \supset [r \supset r]]\)].
+
+\section*{Exercises}
+
+\begin{enumerate}[left=\parindent..0pt,itemindent=*]
+\item Give a categorical proof of [\(p \supset [q \supset q]\)].
+\item Give a categorical proof of [\([s \supset p] \supset [s \supset [r \supset r]]\)].
+\item Give a hypothetical proof of [\(q \supset [r \supset p]\)] on the hypothesis \(p\).
+\item Give a hypothetical proof of [\(p \supset r\)] on the hypotheses \(q\) and [\(p \supset [q \supset r]\)].
+\item Give a hypothetical proof of [\(s \supset [r \supset p]\)] on the hypothesis [\(s \supset p\)].
+\item Give a hypothetical proof of [\(p \supset q\)] on the hypothesis [\(p \supset [p \supset q]\)].
+\item Give a hypothetical proof of [\(q \supset [p \supset r]\)] on the hypothesis [\(p \supset [q \supset r]\)].  (This exercise is more difficult than the others.)
+\end{enumerate}
+
+\openrightfalse
 \chapter{The Method of Subordinate Proofs}
 \label{chap:2}
 

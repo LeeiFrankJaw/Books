@@ -21,6 +21,8 @@
 \setlength{\fitchnumwd}{1em}
 \newlength{\fitchlinewd}
 \setlength{\fitchlinewd}{2in}
+\newlength{\fitchextraht}
+\setlength{\fitchextraht}{1ex}
 
 % Altered from mdwtab.sty: shorter vline, for start of subproof
 \makeatletter
@@ -37,17 +39,17 @@
       \raisebox{-1.4ex}[0pt][0pt]{\rule{1.5em}{\arrayrulewidth}}}}%
   \hspace*{\fitchindent}}
 % Hypothesis, with longer vert line: for >1 hypothesis
-\newcommand{\fj}{\vline%
+\newcommand{\fj}{\favline%
   \makebox[0pt][l]{{%
       \raisebox{-1.4ex}[0pt][0pt]{\rule{1.5em}{\arrayrulewidth}}}}%
   \hspace*{\fitchindent}}
 % Modal subproof: takes argument = operator
-\newcommand{\fitchmodal}[1]{% 
+\newcommand{\fitchmodal}[1]{%
   \makebox[0pt][r]{${}^{#1}$\,}\fvline\hspace*{\fitchindent}}
-\newcommand{\fn}{\fitchmodal{\Box}}% Box subproof 
+\newcommand{\fn}{\fitchmodal{\Box}}% Box subproof
 \newcommand{\fp}{\fitchmodal{\Diamond}}% Diamond subproof
 % Modal subproof with hypothesis in first line (as in Fitch)
-\newcommand{\fitchmodalh}[1]{% 
+\newcommand{\fitchmodalh}[1]{%
   \makebox[0pt][r]{${}^{#1}$\,}%
   \fvline%
   \makebox[0pt][l]{{%
@@ -61,7 +63,7 @@
 % Box around argument, like new variable in ql
 \newcommand{\fw}[1]{\fbox{\footnotesize $#1$}}
 
-% 
+%
 \newcounter{fitchcounter}
 \setcounter{fitchcounter}{0}
 %To avoid starting from 1, \setboolean{resetfitchcounter}{false}
@@ -96,10 +98,10 @@
 {\end{tabular}}
 
 \newenvironment{fitch}{%\renewcommand{\arraystretch}{1.5}
-  \setlength{\extrarowheight}{1ex}%
+  \setlength{\extrarowheight}{\fitchextraht}%
   \begin{fitchnum}}{\end{fitchnum}}
 \newenvironment{fitch*}{%\renewcommand{\arraystretch}{1.5}
-  \setlength{\extrarowheight}{1ex}%
+  \setlength{\extrarowheight}{\fitchextraht}%
   \begin{fitchunum}}{\end{fitchunum}}
 
 % The following is useful for giving a numbered formula, then the proof.
