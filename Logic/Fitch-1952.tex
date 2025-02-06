@@ -217,7 +217,7 @@ The system of this book is closely similar to, and in certain important respects
 \cleardoublepage
 
 \chapter{Symbolic Logic and Formal Proofs}
-\label{chap:1}
+\label{ch:1}
 
 \section{Introduction}
 \label{sec:1}
@@ -705,10 +705,10 @@ The two following categorical proofs will be referred to subsequently in 5.21.
 \subsection{}
 \label{sec:4.31}
 
-\setlength{\fitchlinewd}{2.416in}
+\setlength{\fitchlinewd}{2.437in}
 \begin{fitch}
-  \fb \(p \supset [q \supset r]\) & ax cond rep \\
-  \fa \(s \supset [p \supset [q \supset r]]\) & 1, \ref{sec:4.13}
+  \fb \(p \supset [q \supset p]\) & ax cond rep \\
+  \fa \(s \supset [p \supset [q \supset p]]\) & 1, \ref{sec:4.13}
 \end{fitch}
 
 \subsection{}
@@ -716,7 +716,7 @@ The two following categorical proofs will be referred to subsequently in 5.21.
 
 \begin{fitch}
   \fb \([p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]\) & ax dist \\
-  \fa \(s \supset [p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]\) & 1, \ref{sec:4.13}
+  \fa \(s \supset [[p \supset [q \supset r]] \supset [[p \supset q] \supset [p \supset r]]]\) & 1, \ref{sec:4.13}
 \end{fitch}
 
 \subsection{}
@@ -738,7 +738,7 @@ The theorems of the present system of logic are all those propositions for which
 
 \openrightfalse
 \chapter{The Method of Subordinate Proofs}
-\label{chap:2}
+\label{ch:2}
 
 \end{document}
 
